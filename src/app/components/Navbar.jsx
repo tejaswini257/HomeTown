@@ -50,26 +50,26 @@ export default function Navbar() {
     },
     {
       label: "Kitchen & Dining",
-      href: "/kitchen",
+      href: "/kitchen-dining",
       subLinks: [
-        { href: "/kitchen/cookware", label: "Cookware" },
-        { href: "/kitchen/dining-sets", label: "Dining Sets" },
+        { href: "/kitchen-dining/cookware", label: "Cookware" },
+        { href: "/kitchen-dining/dining-sets", label: "Dining Sets" },
       ],
     },
     {
       label: "Home Decor",
-      href: "/decor",
+      href: "/home-decor",
       subLinks: [
-        { href: "/decor/lighting", label: "Lighting" },
-        { href: "/decor/wall-art", label: "Wall Art" },
+        { href: "/home-decor/lighting", label: "Lighting" },
+        { href: "/home-decor/wall-art", label: "Wall Art" },
       ],
     },
     {
       label: "Home Furnishing",
-      href: "/furnishing",
+      href: "/home-furnishing",
       subLinks: [
-        { href: "/furnishing/carpets", label: "Carpets & Rugs" },
-        { href: "/furnishing/cushions", label: "Cushions & Throws" },
+        { href: "/home-furnishing/carpets", label: "Carpets & Rugs" },
+        { href: "/home-furnishing/cushions", label: "Cushions & Throws" },
       ],
     },
   ];

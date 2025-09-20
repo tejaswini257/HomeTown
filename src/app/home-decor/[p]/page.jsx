@@ -1,5 +1,5 @@
-export default function DecorCategoryPage({ params }) {
-  const { p } = params;
+export default async function CategoryPage({ params }) {
+  const { p } = await params; // ✅ now it's awaited
 
   const displayName = p
     .replace("-", " ")
