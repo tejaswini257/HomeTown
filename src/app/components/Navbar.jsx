@@ -4,6 +4,7 @@ import Link from "next/link";
 import { User, Heart, Search, Menu, X, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import { useWishlist } from "../context/WishlistContext";
 
 export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   const [openDropdown, setOpenDropdown] = useState(null);
   const pathname = usePathname();
+  const { wishlistCount, isHydrated } = useWishlist();
 
   const isActive = (path) => pathname === path;
 
@@ -144,6 +146,7 @@ export default function Navbar() {
                   ? "w-40 sm:w-48 opacity-100"
                   : "w-0 opacity-0 overflow-hidden"
               }`}
+              suppressHydrationWarning
             />
           </div>
           <Link href="/signIn">
@@ -152,15 +155,17 @@ export default function Navbar() {
               size={22}
             />
           </Link>
-          <div className="relative">
+          <Link href="/liked-products" className="relative">
             <Heart
               className="cursor-pointer text-[#3b3323] hover:text-[#A0937D]"
               size={22}
             />
-            <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1">
-              0
-            </span>
-          </div>
+            {isHydrated && wishlistCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1 min-w-[18px] h-[18px] flex items-center justify-center">
+                {wishlistCount}
+              </span>
+            )}
+          </Link>
         </div>
       </nav>
 

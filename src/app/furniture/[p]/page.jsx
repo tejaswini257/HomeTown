@@ -1,15 +1,22 @@
-export default function CategoryPage({ params }) {
-  const { p } = params;
+"use client";
 
-  // You can replace this with product fetching logic later
-  const displayName = p
-    .replace("-", " ") // replace dashes with spaces
-    .replace(/\b\w/g, (c) => c.toUpperCase()); // capitalize words
+import React from "react";
+import ProductCategoryPage from "../../components/ProductCategoryPage";
+
+export default function FurnitureCategoryPage({ params }) {
+  const resolvedParams = React.use(params);
+  const category = resolvedParams.p;
+
+  if (!category) return <p>Category not found</p>;
+
+  const displayName = category
+    .replace("-", " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">{displayName}</h1>
-      <p>Showing products for {displayName}...</p>
-    </div>
+    <ProductCategoryPage 
+      category={category} 
+      categoryName={displayName}
+    />
   );
 }

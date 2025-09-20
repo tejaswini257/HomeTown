@@ -85,10 +85,12 @@ export default function Footer() {
             type="email"
             placeholder="Your email"
             className="w-full sm:flex-1 px-3 py-2 rounded-md text-gray-900 focus:outline-none shadow-sm text-sm"
+            suppressHydrationWarning
           />
           <button
             type="submit"
             className="bg-[#A0937D] text-white px-5 py-2 rounded-md hover:bg-[#8B7F6C] transition w-full sm:w-auto text-sm shadow"
+            suppressHydrationWarning
           >
             Subscribe →
           </button>

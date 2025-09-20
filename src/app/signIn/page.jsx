@@ -25,8 +25,7 @@ export default function SignIn() {
       return;
     }
 
-    // api call
-    setLoading(true); // start loading
+    setLoading(true);
 
     try {
       const response = await axios.post("/api/users/signIn", data);
@@ -44,46 +43,78 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center my-8">
-      <h1 className="text-center font-semibold text-2xl">Login</h1>
-      <p className="text-s mb-5">
-        If you have an account with us, please log in.
-      </p>
-      <form onSubmit={onSign} className="flex flex-col">
-        <h4 className="my-2">Email</h4>
-        <input
-          type="text"
-          name="Email"
-          placeholder="Email"
-          value={data.Email}
-          onChange={onValueChange}
-          className="py-2 pl-3 pr-40 my-2 bg-gray-100"
-        />
-        <h4 className="my-2">Password</h4>
-        <input
-          type="password"
-          name="Password"
-          placeholder="Password"
-          value={data.Password}
-          onChange={onValueChange}
-          className="py-2 pl-3 pr-40 my-2 bg-gray-100"
-        />
-        <p className="text-gray-800">
-          <Link href="/reset">Forgot Your Password?</Link>
-        </p>
-        <button
-          className={`text-center py-2 my-2 rounded-md text-white font-semibold ${
-            loading ? "bg-gray-400 cursor-not-allowed" : "bg-red-500"
-          }`}
-          type="submit"
-          disabled={loading}
-        >
-          {loading ? "Signing In..." : "Sign In"}
-        </button>
-        <p className="text-center font-semibold">
-          <Link href="/register">Create Account</Link>
-        </p>
-      </form>
+    <div className="min-h-screen flex flex-col bg-[#fbfaf8]">
+      <div className="flex-1 flex items-center justify-center">
+        <div className="bg-[#F6E6CB] shadow-lg rounded-2xl w-full max-w-md p-8">
+          <h1 className="text-3xl font-bold text-center text-[#A0937D] mb-6">
+            Sign In
+          </h1>
+          <form onSubmit={onSign} className="space-y-5">
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-semibold text-[#A0937D]">
+                Email
+              </label>
+              <input
+                type="text"
+                name="Email"
+                placeholder="Enter email"
+                value={data.Email}
+                onChange={onValueChange}
+                className="w-full mt-1 px-4 py-2 bg-white border border-[#E3CDC1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A0937D]"
+              />
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-semibold text-[#A0937D]">
+                Password
+              </label>
+              <input
+                type="password"
+                name="Password"
+                placeholder="Enter password"
+                value={data.Password}
+                onChange={onValueChange}
+                className="w-full mt-1 px-4 py-2 bg-white border border-[#E3CDC1] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A0937D]"
+              />
+            </div>
+
+            {/* Forgot Password */}
+            <p className="text-sm text-right">
+              <Link
+                href="/reset"
+                className="text-[#A0937D] hover:text-[#E3CDC1] font-medium"
+              >
+                Forgot your password?
+              </Link>
+            </p>
+
+            {/* Sign In Button */}
+            <button
+              className={`w-full py-2 rounded-lg text-white font-semibold transition-all duration-200 ${
+                loading
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-[#A0937D] hover:bg-[#E3CDC1]"
+              }`}
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? "Signing In..." : "Sign In"}
+            </button>
+
+            {/* Create Account Button */}
+            <Link href="/register">
+              <button
+                type="button"
+                className="w-full py-2 mt-3 rounded-lg text-[#A0937D] font-semibold border border-[#A0937D] hover:bg-[#A0937D] hover:text-white transition-all duration-200"
+              >
+                Create Account
+              </button>
+            </Link>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }

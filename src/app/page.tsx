@@ -81,7 +81,7 @@ export default function HomePage() {
       {/* Description of project */}
       <DemistifyHometown />
       {/* ✅ Footer */}
-      <Footer />
+      
     </div>
   );
 }

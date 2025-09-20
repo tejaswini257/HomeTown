@@ -1,14 +1,22 @@
-export default async function FurnishingCategoryPage({ params }) {
-  const { p } = await params;
+"use client";
 
-  const displayName = p
+import React from "react";
+import ProductCategoryPage from "../../components/ProductCategoryPage";
+
+export default function HomeFurnishingCategoryPage({ params }) {
+  const resolvedParams = React.use(params);
+  const category = resolvedParams.p;
+
+  if (!category) return <p>Category not found</p>;
+
+  const displayName = category
     .replace("-", " ")
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">{displayName}</h1>
-      <p>Showing products for {displayName}...</p>
-    </div>
+    <ProductCategoryPage 
+      category={category} 
+      categoryName={displayName}
+    />
   );
 }
