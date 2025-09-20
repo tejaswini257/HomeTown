@@ -11,31 +11,31 @@ const defaultData = {
   PhoneNumber: "",
   Password: "",
 };
+
 export default function Register() {
   const [data, setData] = useState(defaultData);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onValueChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const onRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onRegister = async (e) => {
     e.preventDefault();
 
     if (
       !data.Firstname ||
-      !data.Lastname || // <-- I also fixed this condition
+      !data.Lastname ||
       !data.Email ||
       !data.PhoneNumber ||
       !data.Password
     ) {
-      alert("Please fill all mandotory fields");
+      alert("Please fill all mandatory fields");
       return;
     }
 
-    //api call
-    setLoading(true); // start loading
+    setLoading(true);
 
     try {
       const response = await axios.post("/api/users/register", data);
@@ -56,14 +56,14 @@ export default function Register() {
       <h1 className="text-2xl mb-4 flex justify-center font-semibold">
         Create account
       </h1>
-      <form onSubmit={onRegister} className="flex flex-col  ">
+      <form onSubmit={onRegister} className="flex flex-col">
         <h4>First name</h4>
         <input
           type="text"
           name="Firstname"
           placeholder="First name"
           value={data.Firstname}
-          onChange={(e) => onValueChange(e)}
+          onChange={onValueChange}
           className="bg-gray-100 rounded-md pl-4 pr-30 py-2 mb-5 mt-2"
         />
         <h4>Last name</h4>
@@ -72,8 +72,8 @@ export default function Register() {
           name="Lastname"
           placeholder="Last name"
           value={data.Lastname}
-          onChange={(e) => onValueChange(e)}
-          className="bg-gray-100 rounded-md pl-4 pr-20 py-2 mb-5 mt-2 "
+          onChange={onValueChange}
+          className="bg-gray-100 rounded-md pl-4 pr-20 py-2 mb-5 mt-2"
         />
         <h4>Email</h4>
         <input
@@ -81,8 +81,8 @@ export default function Register() {
           name="Email"
           placeholder="Email"
           value={data.Email}
-          onChange={(e) => onValueChange(e)}
-          className="bg-gray-100 rounded-md pl-4 pr-20 py-2 mb-5 mt-2 "
+          onChange={onValueChange}
+          className="bg-gray-100 rounded-md pl-4 pr-20 py-2 mb-5 mt-2"
         />
         <h4>Phone Number</h4>
         <input
@@ -90,8 +90,8 @@ export default function Register() {
           name="PhoneNumber"
           placeholder="Phone Number"
           value={data.PhoneNumber}
-          onChange={(e) => onValueChange(e)}
-          className="bg-gray-100 rounded-md pl-4 pr-20 py-2 mb-5 mt-2 "
+          onChange={onValueChange}
+          className="bg-gray-100 rounded-md pl-4 pr-20 py-2 mb-5 mt-2"
         />
         <h4>Password</h4>
         <input
@@ -99,15 +99,15 @@ export default function Register() {
           name="Password"
           placeholder="Password"
           value={data.Password}
-          onChange={(e) => onValueChange(e)}
-          className="bg-gray-100 rounded-md pl-4 pr-60 py-2 mb-5 mt-2 "
+          onChange={onValueChange}
+          className="bg-gray-100 rounded-md pl-4 pr-60 py-2 mb-5 mt-2"
         />
         <button
           className={`text-center py-2 rounded-md text-white font-semibold ${
             loading ? "bg-gray-400 cursor-not-allowed" : "bg-red-500"
           }`}
           type="submit"
-          disabled={loading} // prevent multiple clicks
+          disabled={loading}
         >
           {loading ? "Creating..." : "Create"}
         </button>

@@ -72,22 +72,6 @@ export default function Navbar() {
         { href: "/furnishing/cushions", label: "Cushions & Throws" },
       ],
     },
-    {
-      label: "Interiors",
-      href: "/interiors",
-      subLinks: [
-        { href: "/interiors/modular", label: "Modular Interiors" },
-        { href: "/interiors/custom", label: "Custom Designs" },
-      ],
-    },
-    {
-      label: "Clearance Sale",
-      href: "/clearance",
-      subLinks: [
-        { href: "/clearance/furniture", label: "Furniture Deals" },
-        { href: "/clearance/decor", label: "Decor Discounts" },
-      ],
-    },
   ];
 
   return (

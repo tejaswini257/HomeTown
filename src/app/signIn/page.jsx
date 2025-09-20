@@ -14,21 +14,18 @@ export default function SignIn() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onValueChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const onSign = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSign = async (e) => {
     e.preventDefault();
-    if (
-      !data.Email ||
-      !data.Password
-    ) {
-      alert("Please fill all mandotory fields");
+    if (!data.Email || !data.Password) {
+      alert("Please fill all mandatory fields");
       return;
     }
 
-    //api call
+    // api call
     setLoading(true); // start loading
 
     try {
