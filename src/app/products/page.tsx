@@ -1,11 +1,10 @@
 "use client";
-import DeliveryInfo from "../components/DeliveryInfo";
 import ProductImages from "../components/ProductImages";
 import ProductAccordion from "../components/ProductAccordion";
 import { useState } from "react";
-import { ShoppingCart, User, Heart, Search } from "lucide-react";
+import { Heart } from "lucide-react";
 
-export default function productDetails() {
+export default function ProductDetails() {
   const [quantity, setQuantity] = useState(1);
 
   // decrease quantity but not below 1
@@ -50,7 +49,7 @@ export default function productDetails() {
           </div>
 
           {/* Quantity + Stock */}
-          {/* <div className="flex items-center gap-3">
+           <div className="flex items-center gap-3">
             <div className="flex items-center gap-3">
               <div className="flex items-center border rounded-md">
                 <button
@@ -78,7 +77,7 @@ export default function productDetails() {
             <button className="bg-[#ab886d] hover:bg-[#8b6d55] text-white px-6 py-3 rounded-md font-semibold">
               Add To Cart
             </button>
-          </div> */}
+          </div> 
 
           <Heart className="cursor-pointer hover:text-red-600" size={22} />
 
