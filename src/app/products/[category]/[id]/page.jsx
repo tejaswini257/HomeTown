@@ -20,9 +20,8 @@ const useHydration = () => {
 };
 
 export default function ProductDetailPage({ params }) {
-  const resolvedParams = React.use(params);
-  const category = resolvedParams.category;
-  const productId = parseInt(resolvedParams.id);
+  const category = params?.category;
+  const productId = Number(params?.id);
   const isHydrated = useHydration();
   const router = useRouter();
   const { toggleWishlist, isInWishlist, isHydrated: wishlistHydrated } = useWishlist();
