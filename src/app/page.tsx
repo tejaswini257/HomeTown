@@ -9,7 +9,7 @@ import ProductCard from "./components/ProductCard";
 import SecondBanner from "./components/SecondBanner";
 import StealDeal from "./components/StealDeal";
 import DemistifyHometown from "./components/DemistifyHometown";
-import Footer from "./components/Footer";
+
 
 export default function HomePage() {
   return (
