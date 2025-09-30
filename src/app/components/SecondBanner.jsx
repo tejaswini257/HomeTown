@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 export default function SecondBanner() {
   return (
@@ -26,9 +27,9 @@ export default function SecondBanner() {
               From storage to seating, seamlessly create a living space that
               feels warm, cozy, and timeless.
             </p>
-            <button className="mt-4 sm:mt-6 px-4 sm:px-6 py-2 sm:py-3 bg-[#A0937D] text-white rounded-full shadow-md hover:bg-[#8a826b] transition font-medium text-sm sm:text-base">
+            <Link href="#shop-by-category" className="mt-4 sm:mt-6 inline-block px-4 sm:px-6 py-2 sm:py-3 bg-[#A0937D] text-white rounded-full shadow-md hover:bg-[#8a826b] transition font-medium text-sm sm:text-base">
               Explore Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>

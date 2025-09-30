@@ -1,100 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { allProducts } from "../data/products";
 import { useRef } from "react";
 
-const products = [
-  {
-    id: 1,
-    name: "Waddington Fabric Sofa",
-    price: "₹14,900",
-    oldPrice: "₹36,900",
-    discount: "59% Off",
-    image1: "/images/14 image.webp",
-    image2: "/images/15 image.webp",
-  },
-  {
-    id: 2,
-    name: "Garcia Fabric Sofa",
-    price: "₹18,500",
-    oldPrice: "₹32,000",
-    discount: "42% Off",
-    image1: "/images/16 image.webp",
-    image2: "/images/17 image.webp",
-  },
-  {
-    id: 3,
-    name: "Zyra Fabric Sofa",
-    price: "₹25,999",
-    oldPrice: "₹41,999",
-    discount: "38% Off",
-    image1: "/images/22 image.webp",
-    image2: "/images/18 image.webp",
-  },
-  {
-    id: 4,
-    name: "Orlando Fabric Sofa",
-    price: "₹21,999",
-    oldPrice: "₹34,999",
-    discount: "37% Off",
-    image1: "/images/24 image.webp",
-    image2: "/images/21 image.jpg",
-  },
-  {
-    id: 5,
-    name: "Lorenzo Fabric Sofa",
-    price: "₹6,999",
-    oldPrice: "₹11,999",
-    discount: "41% Off",
-    image1: "/images/27 image.webp",
-    image2: "/images/28 image.webp",
-  },
-  {
-    id: 6,
-    name: "Astra Recliner Sofa",
-    price: "₹19,499",
-    oldPrice: "₹28,499",
-    discount: "32% Off",
-    image1: "/images/29 image.webp",
-    image2: "/images/30 image.webp",
-  },
-  {
-    id: 7,
-    name: "Harper Recliner Sofa",
-    price: "₹7,500",
-    oldPrice: "₹13,500",
-    discount: "44% Off",
-    image1: "/images/34 image.webp",
-    image2: "/images/33 image.webp",
-  },
-  {
-    id: 8,
-    name: "Alto Leather Sofa",
-    price: "₹18,999",
-    oldPrice: "₹29,999",
-    discount: "37% Off",
-    image1: "/images/26 image.webp",
-    image2: "/images/23 image.webp",
-  },
-  {
-    id: 9,
-    name: "Venice Fabric Sofa",
-    price: "₹9,499",
-    oldPrice: "₹15,999",
-    discount: "40% Off",
-    image1: "/images/18 image.webp",
-    image2: "/images/19 image.jpg",
-  },
-  {
-    id: 10,
-    name: "Oslo Fabric Sofa",
-    price: "₹13,499",
-    oldPrice: "₹22,499",
-    discount: "40% Off",
-    image1: "/images/Baltimor_1Set_HD.webp",
-    image2: "/images/Baltimor_9.webp",
-  },
-];
+// Pull from data so links work
+const products = (allProducts.sofas || []).slice(0, 10).map(p => ({
+  id: p.id,
+  name: p.name,
+  price: `₹${p.price.toLocaleString('en-IN')}`,
+  oldPrice: `₹${p.oldPrice.toLocaleString('en-IN')}`,
+  discount: `${p.discount}% Off`,
+  image1: p.image1,
+  image2: p.image2,
+  category: p.category
+}));
 
 export default function ProductCard() {
   const scrollRef = useRef(null);
@@ -128,7 +49,7 @@ export default function ProductCard() {
               </span>
 
               {/* Product image area with hover swap */}
-              <div className="relative w-full flex-grow flex items-center justify-center py-6 sm:py-8 group cursor-pointer">
+              <Link href={`/products/${product.category}/${product.id}`} className="relative w-full flex-grow flex items-center justify-center py-6 sm:py-8 group cursor-pointer">
                 <div className="relative h-[220px] w-[80%] mx-auto">
                   <Image
                     src={product.image1}
@@ -143,7 +64,7 @@ export default function ProductCard() {
                     className="object-cover rounded-lg absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity"
                   />
                 </div>
-              </div>
+              </Link>
 
               {/* DETAILS & Button */}
               <div className="flex flex-col gap-1 sm:gap-2 px-4 sm:px-6 md:px-8 mb-5 sm:mb-6 md:mb-7">
@@ -153,23 +74,16 @@ export default function ProductCard() {
                 <div className="mb-3 sm:mb-4 text-sm sm:text-base text-[#a0937d] font-semibold">
                   {product.price}
                 </div>
-                <button
+                <Link
+                  href={`/products/${product.category}/${product.id}`}
                   className="w-full text-white font-semibold text-sm sm:text-base py-2 sm:py-2.5 rounded-lg border transition-colors"
                   style={{
                     backgroundColor: "#A0937D",
                     borderColor: "#A0937D",
                   }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.backgroundColor = "#8a826b";
-                    e.currentTarget.style.color = "#fff";
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.backgroundColor = "#A0937D";
-                    e.currentTarget.style.color = "#fff";
-                  }}
                 >
                   + Order
-                </button>
+                </Link>
               </div>
             </div>
           ))}

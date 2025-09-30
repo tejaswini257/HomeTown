@@ -1,51 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { allProducts } from "../data/products";
 
-const products = [
-  {
-    id: 1,
-    name: "Rico Chair",
-    price: "₹59,900",
-    image1: "/images/sh12.png",
-    image2: "/images/gii441.png",
-  },
-  {
-    id: 2,
-    name: "Wooden Chair",
-    price: "₹124,900",
-    image1: "/images/gii55.png",
-    image2: "/images/gii551.png",
-  },
-  {
-    id: 3,
-    name: "Wall Frame",
-    price: "₹79,900",
-    image1: "/images/sh16.png",
-    image2: "/images/gii77.png",
-  },
-  {
-    id: 4,
-    name: "Bean Bag Chair",
-    price: "₹42,000",
-    image1: "/images/gi88.png",
-    image2: "/images/gi881.png",
-  },
-  {
-    id: 5,
-    name: "Office Chair",
-    price: "₹89,900",
-    image1: "/images/sh15.png",
-    image2: "/images/gi991.png",
-  },
-  {
-    id: 6,
-    name: "Lamp Set",
-    price: "₹29,900",
-    image1: "/images/sh13.png",
-    image2: "/images/gii101.png",
-  },
-];
+// Use a consistent source of truth: pick first 6 sofas
+const products = (allProducts.sofas || []).slice(0, 6).map(p => ({
+  id: p.id,
+  name: p.name,
+  price: `₹${p.price.toLocaleString('en-IN')}`,
+  image1: p.image1,
+  image2: p.image2,
+  category: p.category
+}));
 
 export default function NewArrival() {
   return (
@@ -80,7 +47,7 @@ export default function NewArrival() {
             style={{ fontSize: "0.95rem", minHeight: "420px" }}
           >
             {/* Product image with hover */}
-            <div className="relative w-full aspect-square flex items-center justify-center mb-4 overflow-hidden group">
+            <Link href={`/products/${product.category}/${product.id}`} className="relative w-full aspect-square flex items-center justify-center mb-4 overflow-hidden group">
               <Image
                 src={product.image1}
                 alt={product.name}
@@ -93,7 +60,7 @@ export default function NewArrival() {
                 fill
                 className="object-contain rounded-lg absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity"
               />
-            </div>
+            </Link>
 
             {/* Details + Button */}
             <div className="flex flex-col flex-grow justify-between">
@@ -104,24 +71,17 @@ export default function NewArrival() {
                 <div className="text-sm text-gray-500 mt-1">{product.price}</div>
               </div>
 
-              <button
+              <Link
+                href={`/products/${product.category}/${product.id}`}
                 className="w-full py-2 rounded text-sm font-semibold transition-colors border mt-auto"
                 style={{
                   backgroundColor: "#A0937D",
                   color: "#fff",
                   borderColor: "#A0937D",
                 }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = "#8a826b";
-                  e.currentTarget.style.color = "#fff";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = "#A0937D";
-                  e.currentTarget.style.color = "#fff";
-                }}
               >
                 + Order
-              </button>
+              </Link>
             </div>
           </div>
         ))}

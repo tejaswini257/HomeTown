@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
@@ -64,6 +65,7 @@ export default function A() {
             onMouseLeave={() => setHoveredId(null)}
             whileHover={{ scale: 1.08 }}
           >
+            <Link href="#shop-by-category" aria-label={`Explore ${cat.name}`}>
             <motion.div
               animate={{ y: [0, -15, 0] }}
               transition={{
@@ -95,6 +97,7 @@ export default function A() {
                 )}
               </AnimatePresence>
             </motion.div>
+            </Link>
           </motion.div>
         );
       })}

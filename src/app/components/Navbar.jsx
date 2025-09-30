@@ -119,6 +119,7 @@ export default function Navbar() {
                     <Link
                       key={href}
                       href={href}
+                      onClick={() => setOpenDropdown(null)}
                       className="px-4 py-2 text-sm hover:bg-[#F6E6CB]/60 hover:text-[#A0937D] transition rounded-md"
                     >
                       {label}

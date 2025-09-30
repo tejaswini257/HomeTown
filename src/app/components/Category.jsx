@@ -21,7 +21,7 @@ const categories = [
 
 export default function Category() {
   return (
-    <section className="w-full bg-gradient-to-br from-[#F6E6CB] via-[#E7D4B5] to-[#F6E6CB] py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-12">
+    <section id="shop-by-category" className="w-full bg-gradient-to-br from-[#F6E6CB] via-[#E7D4B5] to-[#F6E6CB] py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-12 scroll-mt-24">
       {/* Heading */}
       <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
         <motion.h2
@@ -55,7 +55,7 @@ export default function Category() {
             viewport={{ once: true }}
             className={`${idx % 2 === 0 ? "translate-y-3 sm:translate-y-4" : "-translate-y-3 sm:-translate-y-4"}`}
           >
-            <Link href={cat.href} className="group block text-center">
+            <Link href={`/furniture${cat.href}`} className="group block text-center">
               {/* Floating Image */}
               <motion.div
                 initial={{ x: 0 }}

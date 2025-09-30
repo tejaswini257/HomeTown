@@ -40,7 +40,7 @@ export default function HomePage() {
                 </span>
               </div>
               <Link
-                href="/shop"
+                href="#shop-by-category"
                 className="inline-block text-xl font-bold px-8 py-3 rounded-md shadow transition"
                 style={{
                   backgroundColor: "#A0937D",

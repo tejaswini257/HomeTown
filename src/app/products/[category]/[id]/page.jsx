@@ -20,8 +20,9 @@ const useHydration = () => {
 };
 
 export default function ProductDetailPage({ params }) {
-  const category = params?.category;
-  const productId = Number(params?.id);
+  const resolvedParams = React.use(params);
+  const category = resolvedParams.category;
+  const productId = Number(resolvedParams.id);
   const isHydrated = useHydration();
   const router = useRouter();
   const { toggleWishlist, isInWishlist, isHydrated: wishlistHydrated } = useWishlist();
@@ -96,11 +97,11 @@ export default function ProductDetailPage({ params }) {
         <div className="flex items-center gap-2 text-sm text-gray-600 mb-6">
           <Link href="/" className="hover:text-[#A0937D]">Home</Link>
           <span>/</span>
-          <Link href={`/${category.split('-')[0]}`} className="hover:text-[#A0937D] capitalize">
-            {category.split('-')[0]}
+          <Link href="/furniture" className="hover:text-[#A0937D] capitalize">
+            Furniture
           </Link>
           <span>/</span>
-          <Link href={`/${category.split('-')[0]}/${category}`} className="hover:text-[#A0937D] capitalize">
+          <Link href={`/furniture/${category}`} className="hover:text-[#A0937D] capitalize">
             {category.replace('-', ' ')}
           </Link>
           <span>/</span>
