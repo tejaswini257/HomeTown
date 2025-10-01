@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Star, Heart, Share2, Truck, Shield, RotateCcw } from "lucide-react";
-import { allProducts } from "../../../data/products";
 import { useWishlist } from "../../../context/WishlistContext";
 
 // Custom hook to handle hydration
@@ -29,9 +28,30 @@ export default function ProductDetailPage({ params }) {
   
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Find the product
-  const product = allProducts[category]?.find(p => p.id === productId);
+  // Fetch product from API
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/products/${productId}`);
+        const data = await response.json();
+        if (data.id) {
+          setProduct(data);
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (productId) {
+      fetchProduct();
+    }
+  }, [productId]);
 
   const formatPrice = (price) => {
     return new Intl.NumberFormat('en-IN', {
@@ -60,12 +80,12 @@ export default function ProductDetailPage({ params }) {
   };
 
   // Show loading state during hydration
-  if (!isHydrated || !wishlistHydrated) {
+  if (!isHydrated || !wishlistHydrated || loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A0937D] mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <p className="text-gray-600">Loading product...</p>
         </div>
       </div>
     );

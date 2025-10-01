@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Filter, X, Grid, List, Star } from "lucide-react";
-import { allProducts, filterOptions, sortOptions } from "../data/products";
+import { filterOptions, sortOptions } from "../data/products";
 
 // Custom hook to handle hydration
 const useHydration = () => {
@@ -19,13 +19,37 @@ const useHydration = () => {
 
 export default function ProductCategoryPage({ category, categoryName }) {
   const isHydrated = useHydration();
-  const [products, setProducts] = useState(allProducts[category] || []);
-  const [filteredProducts, setFilteredProducts] = useState(allProducts[category] || []);
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   const [viewMode, setViewMode] = useState("grid");
   const [sortBy, setSortBy] = useState("newest");
   const [priceRange, setPriceRange] = useState({ min: 0, max: 50000 });
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  // Fetch products from API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`/api/products?category=${category}`);
+        const data = await response.json();
+        if (data.products) {
+          setProducts(data.products);
+          setFilteredProducts(data.products);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (category) {
+      fetchProducts();
+    }
+  }, [category]);
 
   // Initialize selected filters based on category
   useEffect(() => {
@@ -104,12 +128,12 @@ export default function ProductCategoryPage({ category, categoryName }) {
   };
 
   // Show loading state during hydration
-  if (!isHydrated) {
+  if (!isHydrated || loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A0937D] mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
+          <p className="text-gray-600">Loading products...</p>
         </div>
       </div>
     );
